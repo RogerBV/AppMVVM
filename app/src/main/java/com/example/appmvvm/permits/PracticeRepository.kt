@@ -1,5 +1,6 @@
 package com.example.appmvvm.permits
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.appmvvm.models.ApiClient
 import com.example.appmvvm.models.PracticeService
@@ -33,7 +34,21 @@ class PracticeRepository {
         try
         {
             val call = practiceService.listPermits()
-            call.enqueue(object : Callback<List<RegisteredPermit>> {
+
+            call.enqueue(object:Callback<List<RegisteredPermit>>{
+                override fun onResponse(
+                    call: Call<List<RegisteredPermit>>,
+                    response: Response<List<RegisteredPermit>>
+                ) {
+                    Log.d("TAG","RESPONSE")
+                }
+
+                override fun onFailure(call: Call<List<RegisteredPermit>>, t: Throwable) {
+                    Log.e("ERROR",t.message.toString() )
+                }
+            })
+
+            /*call.enqueue(object : Callback<List<RegisteredPermit>> {
                 override fun onResponse(
                     call: Call<List<RegisteredPermit>>,
                     response: Response<List<RegisteredPermit>>
@@ -46,7 +61,7 @@ class PracticeRepository {
                 override fun onFailure(call: Call<List<RegisteredPermit>>, t: Throwable) {
                     permitsReponseLiveData.postValue(null)
                 }
-            })
+            })*/
 
         }catch (ex:Exception)
         {

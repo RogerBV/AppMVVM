@@ -11,7 +11,7 @@ import java.util.*
 
 class ApiClient {
     companion object {
-        val BASE_URL = "http://192.168.1.59"
+        val BASE_URL = "http://192.168.1.9:8090"
         private var retrofit: Retrofit? = null
 
         fun getClient(): Retrofit? {
@@ -23,7 +23,6 @@ class ApiClient {
                             val request: Request = chain.request()
                                 .newBuilder()
                                 .addHeader("content-type","application/json; charset=utf-8")
-                                //.addHeader("access-control-allow-origin ", "*")
                                 .build()
                             chain.proceed(request)
                         }
@@ -31,16 +30,12 @@ class ApiClient {
                         .protocols(Arrays.asList( /*Protocol.HTTP_2, */Protocol.HTTP_1_1))
                         .build()
 
-
                 val interceptor = HttpLoggingInterceptor()
                 interceptor.level =  HttpLoggingInterceptor.Level.BODY
-                //val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
-
-
 
                 retrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    //.client(client)
+                    .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
             }
