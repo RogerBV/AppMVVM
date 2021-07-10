@@ -3,21 +3,21 @@ package com.example.appmvvm.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.appmvvm.models.RegisteredPermit
-import com.example.appmvvm.permits.PracticeRepository
+import com.example.appmvvm.network.models.RegisteredPermit
+import com.example.appmvvm.repositories.PermitRepository
 
 class PracticeViewModel(application: Application) : AndroidViewModel(application) {
-    private lateinit var practiceRepository:PracticeRepository
+    private lateinit var permitRepository:PermitRepository
 
     private lateinit var permitsLiveData: MutableLiveData<List<RegisteredPermit>>
 
     public suspend fun init()
     {
-        practiceRepository = PracticeRepository()
+        //permitRepository = PermitRepository()
 
-        practiceRepository.ListPermits()
+        permitRepository.ListPermits()
 
-        permitsLiveData = practiceRepository.getPermitListLiveData()
+        //permitsLiveData = permitRepository.getPermitListLiveData()
     }
     public fun ListPermits(): MutableLiveData<List<RegisteredPermit>>
     {

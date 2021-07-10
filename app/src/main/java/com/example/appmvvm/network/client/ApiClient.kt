@@ -1,4 +1,4 @@
-package com.example.appmvvm.models
+package com.example.appmvvm.network.client
 
 import okhttp3.OkHttpClient
 import okhttp3.Protocol

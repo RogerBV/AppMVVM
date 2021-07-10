@@ -1,14 +1,12 @@
 package com.example.appmvvm.adapters
 
-import android.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.appmvvm.models.RegisteredPermit
-import okhttp3.internal.Util
-import androidx.appcompat.app.AppCompatActivity
+import com.example.appmvvm.network.models.RegisteredPermit
+
 class PermitSearchResultsAdapter:
     RecyclerView.Adapter<PermitSearchResultsAdapter.PermitSearchResultHolder>() {
     private var results: List<RegisteredPermit> = ArrayList()
@@ -47,7 +45,6 @@ class PermitSearchResultsAdapter:
         RecyclerView.ViewHolder(itemView) {
         lateinit var employeeNameTextView: TextView
         lateinit var employeeSurnameTextView: TextView
-
 
         init {
             employeeNameTextView = itemView.findViewById(com.example.appmvvm.R.id.permit_employee_name)
