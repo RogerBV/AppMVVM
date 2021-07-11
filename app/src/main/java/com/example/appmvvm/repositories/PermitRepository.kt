@@ -19,11 +19,11 @@ class PermitRepository @Inject constructor(
 
         return flow {
             emit(fetchTrendingPermitsCached())
+            emit(Result.loading())
             val result = permitRemoteDataSource.ListPermits()
-            if(result.isSuccess)
+            if(result.status == Result.Status.SUCCESS)
             {
-                var data = result.getOrNull()!!
-                data.results.let { it ->
+                result.data?.results?.let { it ->
                     permitDao.deleteAllPermits(it);
                     permitDao.insertAllPermits(it)
                 }
@@ -31,20 +31,6 @@ class PermitRepository @Inject constructor(
             emit(result)
         }.flowOn(Dispatchers.IO)
 
-        /*return flow {
-            emit(fetchTrendingPermitsCached())
-            emit(com.example.appmvvm.Result.loading())
-            val result = permitRemoteDataSource.ListPermits()
-
-            //Cache to database if response is successful
-            if (result.status == com.example.appmvvm.Result.Status.SUCCESS) {
-                result.data?.results?.let { it ->
-                    permitDao.deleteAllPermits(it)
-                    permitDao.insertAllPermits (it)
-                }
-            }
-            emit(result)
-        }.flowOn(Dispatchers.IO)*/
     }
     private fun fetchTrendingPermitsCached(): Result<TrendingPermitResponse>? =
         permitDao.getAllPermits()?.let {

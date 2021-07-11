@@ -11,6 +11,10 @@ interface PermitDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllPermits(permits:List<Permit>)
+
+    @Delete
+    fun delete(permit:Permit)
+
     @Delete
     fun deleteAllPermits(permits:List<Permit>)
 

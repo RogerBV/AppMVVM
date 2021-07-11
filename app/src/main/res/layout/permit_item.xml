@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="4dp"
@@ -10,12 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/permit_item_smallThumbnail"
-            android:layout_width="80dp"
-            android:layout_height="100dp"
-            android:layout_constraintTop_toTopOf="parent"
-            android:layout_constraintEnd_toStartOf="@id/permit_item_rightLayout"/>
+
 
         <LinearLayout
             android:id="@+id/permit_item_rightLayout"
@@ -23,8 +19,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="4dp"
-            android:layout_constraintEnd_toEndOf="@+id/permit_item_smallThumbnail"
-            android:layout_constraintTop_toTopOf="parent">
+            tools:ignore="MissingConstraints">
 
             <TextView
                 android:id="@+id/permit_employee_name"
