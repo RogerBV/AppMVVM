@@ -18,6 +18,14 @@ class PermitRemoteDataSource @Inject constructor(private val retrofit:Retrofit) 
         )
     }
 
+    suspend fun registerPermit(employeeName:String,employeeSurname:String):Result<Permit>{
+        val permitService = retrofit.create(PracticeService::class.java)
+        return getResponse(
+            request = { permitService.registerPermit(employeeName,employeeSurname) },
+            defaultErroMessage = "Error"
+        )
+    }
+
     private suspend fun <T> getResponse(request:suspend () -> Response<T>, defaultErroMessage:String):Result<T> {
         return try {
             println("I'm working in thread ${Thread.currentThread().name}")

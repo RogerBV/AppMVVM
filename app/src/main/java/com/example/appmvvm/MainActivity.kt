@@ -1,5 +1,6 @@
 package com.example.appmvvm
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,25 +17,21 @@ import com.example.appmvvm.network.models.Result
 import androidx.lifecycle.Observer
 import kotlin.collections.ArrayList
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val list = ArrayList<Permit>()
-    private val viewModel by viewModels<ListingViewModel>()
+    //private val viewModel by viewModels<ListingViewModel>()
     private lateinit var permitAdapter: PermitAdapter
     private lateinit var rvPermits:RecyclerView
     private lateinit var loading:ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        init()
-        subscribeUi()
-        /*Handler().postDelayed({
-            startActivity(Intent(this,SecondActivity::class.java))
-            finish()
-        },2000)*/
+
+        var i = Intent(applicationContext,   MenuActivity::class.java)
+        startActivity(i)
     }
-    private fun init() {
+    /*private fun init() {
         rvPermits = findViewById(R.id.rvPermits)
         loading = findViewById(R.id.loading)
         val layoutManager = LinearLayoutManager(this)
@@ -48,15 +45,14 @@ class MainActivity : AppCompatActivity() {
         rvPermits.addItemDecoration(dividerItemDecoration)
         permitAdapter = PermitAdapter(this, list)
         rvPermits.adapter = permitAdapter
-    }
-    private fun subscribeUi() {
+    }*/
+    /*private fun subscribeUi() {
         viewModel.permitList.observe(this, Observer { result ->
 
             when (result.status ) {
                 Result.Status.SUCCESS -> {
                     result.data?.let { list ->
                         permitAdapter.updateData(list)
-                        //permitAdapter = PermitAdapter(this,list)
                         rvPermits.adapter = permitAdapter
 
                     }
@@ -76,5 +72,5 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-    }
+    }*/
 }

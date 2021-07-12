@@ -15,6 +15,17 @@ class PermitRepository @Inject constructor(
     private val permitDao: PermitDao
 )
 {
+    suspend fun registerPermit(employeeName:String,employeeSurname:String):Flow<Result<Permit>?>{
+        return flow {
+            emit(Result.loading())
+            val result = permitRemoteDataSource.registerPermit(employeeName,employeeSurname)
+            if(result.status == Result.Status.SUCCESS)
+            {
+                permitDao.insertPermit(result.data!!)
+            }
+            emit(result)
+        }.flowOn(Dispatchers.IO)
+    }
 
     suspend fun ListPermits(): Flow<Result<List<Permit>>?> {
 

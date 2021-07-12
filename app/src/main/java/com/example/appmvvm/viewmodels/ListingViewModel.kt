@@ -30,5 +30,12 @@ class ListingViewModel @ViewModelInject public constructor(private val permitRep
             }
         }
     }
+    public fun registerPermit(employeeName:String,employeeSurname:String){
+        viewModelScope.launch {
+            permitRepository.registerPermit(employeeName,employeeSurname).collect {
+
+            }
+        }
+    }
 
 }
