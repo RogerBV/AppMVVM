@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
             when (result.status ) {
                 Result.Status.SUCCESS -> {
-                    result.data?.results?.let { list ->
+                    result.data?.let { list ->
                         permitAdapter.updateData(list)
                     }
                     loading.visibility = View.GONE

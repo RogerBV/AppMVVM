@@ -1,5 +1,7 @@
 package com.example.appmvvm.network.client
 
+import com.example.appmvvm.localdatasource.entities.Permit
+import com.example.appmvvm.network.models.RegisteredPermit
 import com.example.appmvvm.network.models.Result
 import com.example.appmvvm.network.models.TrendingPermitResponse
 import com.example.appmvvm.utils.ErrorUtils
@@ -8,7 +10,7 @@ import retrofit2.Retrofit
 import javax.inject.Inject
 
 class PermitRemoteDataSource @Inject constructor(private val retrofit:Retrofit) {
-    suspend fun ListPermits():Result<TrendingPermitResponse>{
+    suspend fun ListPermits():Result<List<Permit>>{
         val permitService = retrofit.create(PracticeService::class.java)
         return getResponse(
             request = { permitService.listPermits() },

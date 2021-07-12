@@ -1,6 +1,7 @@
 package com.example.appmvvm.repositories
 
 import com.example.appmvvm.localdatasource.dao.PermitDao
+import com.example.appmvvm.localdatasource.entities.Permit
 import com.example.appmvvm.network.client.PermitRemoteDataSource
 import com.example.appmvvm.network.models.*
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +16,7 @@ class PermitRepository @Inject constructor(
 )
 {
 
-    suspend fun ListPermits(): Flow<Result<TrendingPermitResponse>?> {
+    suspend fun ListPermits(): Flow<Result<List<Permit>>?> {
 
         return flow {
             emit(fetchTrendingPermitsCached())
@@ -23,7 +24,8 @@ class PermitRepository @Inject constructor(
             val result = permitRemoteDataSource.ListPermits()
             if(result.status == Result.Status.SUCCESS)
             {
-                result.data?.results?.let { it ->
+                result.data?.let { it ->
+                //result.data?.results?.let { it ->
                     permitDao.deleteAllPermits(it);
                     permitDao.insertAllPermits(it)
                 }
@@ -32,9 +34,9 @@ class PermitRepository @Inject constructor(
         }.flowOn(Dispatchers.IO)
 
     }
-    private fun fetchTrendingPermitsCached(): Result<TrendingPermitResponse>? =
+    private fun fetchTrendingPermitsCached(): Result<List<Permit>>? =
         permitDao.getAllPermits()?.let {
-            Result.success(TrendingPermitResponse(it))
+            Result.success(it)
         }
 
 }

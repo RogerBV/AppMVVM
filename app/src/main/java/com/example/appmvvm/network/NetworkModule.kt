@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 @InstallIn(ApplicationComponent::class)
 object NetworkModule {
-    private const val baseUrl = "http://192.168.1.11/";
+    private const val baseUrl = "http://192.168.1.112:8090/";
     @Provides
     fun provideHTTPLoggingInterceptor():HttpLoggingInterceptor{
         val interceptor = HttpLoggingInterceptor()
@@ -31,7 +31,7 @@ object NetworkModule {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
+            //.client(okHttpClient)
             .build()
     }
 }
