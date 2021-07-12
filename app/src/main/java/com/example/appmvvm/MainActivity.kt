@@ -56,6 +56,9 @@ class MainActivity : AppCompatActivity() {
                 Result.Status.SUCCESS -> {
                     result.data?.let { list ->
                         permitAdapter.updateData(list)
+                        //permitAdapter = PermitAdapter(this,list)
+                        rvPermits.adapter = permitAdapter
+
                     }
                     loading.visibility = View.GONE
                 }

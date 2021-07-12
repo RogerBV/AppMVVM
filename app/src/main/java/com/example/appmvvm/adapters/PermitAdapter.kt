@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appmvvm.DetailsActivity
 import com.example.appmvvm.R
 import com.example.appmvvm.localdatasource.entities.Permit
+import kotlinx.android.synthetic.main.permit_item.view.*
 
 class PermitAdapter(private val context: Context, private val list: ArrayList<Permit>) :
     RecyclerView.Adapter<PermitAdapter.PermitViewHolder>() {
@@ -25,14 +26,15 @@ class PermitAdapter(private val context: Context, private val list: ArrayList<Pe
 
         }
 
-        fun bind(movie: Permit) {
+        fun bind(permit: Permit) {
 
             itemView.setOnClickListener {
                 val intent = Intent(context, DetailsActivity::class.java)
                 //intent.putExtra(DetailsActivity.EXTRAS_MOVIE_ID, movie.id)
                 context.startActivity(intent)
             }
-            //itemView.tvTitle.text = movie.employeeName
+            itemView.permit_employee_name.text = permit.EmployeeName
+            itemView.permit_employee_surname.text = permit.EmployeeSurname
             //Glide.with(context).load(Config.IMAGE_URL + movie.poster_path)
             //    .apply(RequestOptions().override(400, 400).centerInside().placeholder(R.drawable.placehoder)).into(itemView.ivPoster)
             //itemView.tvGenre.text = Genre.getGenre(movie.genre_ids)
